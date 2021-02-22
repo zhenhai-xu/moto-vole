@@ -1,9 +1,13 @@
-import Control.Control;
 import Control.Avancer;
+import Control.Control;
 import Model.*;
 import Vue.Affichage;
 
 import javax.swing.*;
+import java.util.ArrayList;
+
+import java.util.List;
+
 
 public class main {
     public static void main(String[] args) {
@@ -15,13 +19,17 @@ public class main {
 
 //        Position position = new Position(LARG/2-WIDTH/2,HAUT-HEIGHT);
 
-        Nuages nuages=new Nuages();
+        Nuages nuages=new Nuages("nuage");
         Piste piste=new Piste();
-        Moto moto = new Moto(piste,nuages);
-        Lune lune = new Lune();
-        Soleil soleil=new Soleil();
+        Lune lune = new Lune("lune");
+        Soleil soleil=new Soleil("soleil");
+        Moto moto = new Moto(piste,nuages, lune, soleil);
+
+
+        Arbre arbre=new Arbre();
         Affichage affichage = new Affichage(moto,piste,lune,soleil,nuages);
-        Thread avancer=new Thread(new Avancer(piste,affichage));
+        //affichage.action();
+        Thread avancer=new Thread(new Avancer(piste,affichage,moto));
         avancer.start();
         moto.setAffichage(affichage);
         frame.addKeyListener(new Control(moto));

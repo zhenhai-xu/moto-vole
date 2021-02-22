@@ -26,21 +26,38 @@ public class Control implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                moto.move(Direction.up);
+
+                moto.up =true;
                 break;
             case KeyEvent.VK_DOWN:
-                moto.move(Direction.down);
+
+                moto.down=true;
                 break;
             case KeyEvent.VK_LEFT:
-                moto.move(Direction.left);
+
+                moto.left = true;
                 break;
             case KeyEvent.VK_RIGHT:
-                moto.move(Direction.right);
+                moto.right = true;
         }
+
     }
     public void keyTyped(KeyEvent e) {
     }
 
     public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                moto.up =false;
+                break;
+            case KeyEvent.VK_DOWN:
+                moto.down=false;
+                break;
+            case KeyEvent.VK_LEFT:
+                moto.left = false;
+                break;
+            case KeyEvent.VK_RIGHT:
+                moto.right = false;
+        }
     }
 }

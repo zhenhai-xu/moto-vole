@@ -1,6 +1,5 @@
 package Model;
 
-import Control.Direction;
 import Vue.Affichage;
 
 import javax.imageio.ImageIO;
@@ -15,7 +14,14 @@ public class Moto {
     private final int ABSC_MOVE = 10;
     private Piste piste;
     private Nuages nuages;
-    public Moto(Piste piste,Nuages nuages){
+    private Soleil soleil;
+    private Lune lune;
+
+    public  boolean up = false;
+    public  boolean down = false;
+    public  boolean left = false;
+    public  boolean right = false;
+    public Moto(Piste piste,Nuages nuages,Lune lune,Soleil soleil){
     this.absc = Affichage.LARG/2-Affichage.WIDTH/2;
         try {
             this.pitrue = ImageIO.read(new File("src/png/moto.png"));
@@ -24,12 +30,15 @@ public class Moto {
         }
         this.piste =piste;
         this.nuages =nuages;
+        this.lune=lune;
+        this.soleil=soleil;
     }
-
+/*
     /**
      * Effectuer différentes actions en tapant les touches du clavier
      * @param key
      */
+/*
     public void move(Direction key) {
         if(key == Direction.up ) {
             //this.absc =
@@ -49,8 +58,44 @@ public class Moto {
             System.out.println("la grenouille atteigne le bord ");
         }
         affichage.repaint();
+    }*/
+    public void moveUp() {
+        if(up){
+            System.out.println("acclerer");
+        }
     }
-
+    public void moveLeft() {
+        if(left && this.absc > 0){
+            absc -= ABSC_MOVE;
+            nuages.moveR();
+            soleil.moveR();
+            lune.moveR();
+            affichage.getArbrelisteR();
+            piste.setPositVoieR();
+        }
+    }
+    public void moveRight() {
+        if(right && this.absc < affichage.LARG-affichage.WIDTH){
+            absc += ABSC_MOVE;
+            nuages.moveL();
+            soleil.moveL();
+            lune.moveL();
+            affichage.getArbrelisteL();
+            piste.setPositVoieL();
+        }
+    }
+    public void moveDown() {
+        if (down) {
+            System.out.println("lencement");
+        }
+    }
+public void move(){
+    moveUp();
+    moveDown();
+    moveLeft();
+    moveRight();
+    affichage.repaint();
+}
     /**
      * setting affichage a moto.
      * @param affichage

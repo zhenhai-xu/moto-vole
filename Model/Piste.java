@@ -11,7 +11,7 @@ import java.util.Random;
  * mais, on fait just creer une ligne, la deuxieme ligne est construit par la premiere ligne
  */
 public class Piste{
-    int x1=Affichage.LARG/2 - 100;//initiation de la piste de premier point dans la premiere ligne
+    int x1=Affichage.LARG/2;//initiation de la piste de premier point dans la premiere ligne
     int y1=Affichage.HAUT;
 
     public static final int Avancer=1;
@@ -54,6 +54,9 @@ public class Piste{
             int y= points1.get(points1.size()-1).y-150;
             this.points1.add(new Point(x,y));
         }
+        if(points1.get(0).y<=150){
+            removePiste();
+        }
         return this.points1;
     }
 
@@ -67,6 +70,10 @@ public class Piste{
         for(int i = 0; i < points1.size()-1; i++) {
             points1.get(i).x += 5;
         }
+    }
+
+    public void removePiste(){
+        points1.remove(0);
     }
 
 }
