@@ -1,5 +1,6 @@
 package Control;
 
+import Model.Arbre;
 import Model.Moto;
 import Model.Piste;
 import Vue.Affichage;
@@ -10,14 +11,16 @@ import javax.swing.*;
  * creer un thread pour la piste change toujours.
  */
 public class Avancer implements Runnable{
-    Piste piste;//un objet de piste
-    Affichage affichage;// objet de affichage
-    Moto moto;
+    private Piste piste;//un objet de piste
+    private Affichage affichage;// objet de affichage
+    private Moto moto;
+    private Arbre arbre;
 
-    public Avancer(Piste piste, Affichage affichage,Moto moto){
+    public Avancer(Piste piste, Affichage affichage, Moto moto, Arbre arbre){
         this.piste=piste;
         this.affichage=affichage;
         this.moto=moto;
+        this.arbre=arbre;
     }
     @Override
     public void run() {
@@ -27,8 +30,8 @@ public class Avancer implements Runnable{
                 //Modifier les coordonnées de piste
                 piste.setter();
                 moto.move();
-                affichage.getArbre();//creer un arbre
-                affichage.arbreMove();//laisser les arbres qui descendre;
+                arbre.getArbre();
+                arbre.arbreMove();//laisser les arbres qui descendre;
                 affichage.revalidate();
                 affichage.repaint();
             }catch (InterruptedException e){

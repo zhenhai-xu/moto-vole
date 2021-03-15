@@ -1,5 +1,6 @@
 import Control.Avancer;
 import Control.Control;
+import Control.Temp;
 import Model.*;
 import Vue.Affichage;
 
@@ -23,13 +24,13 @@ public class main {
         Piste piste=new Piste();
         Lune lune = new Lune("lune");
         Soleil soleil=new Soleil("soleil");
-        Moto moto = new Moto(piste,nuages, lune, soleil);
-
-
         Arbre arbre=new Arbre();
-        Affichage affichage = new Affichage(moto,piste,lune,soleil,nuages);
-        //affichage.action();
-        Thread avancer=new Thread(new Avancer(piste,affichage,moto));
+        Moto moto = new Moto(piste,nuages, lune, soleil,arbre);
+        Sablier sablier=new Sablier();
+        Affichage affichage = new Affichage(moto,piste,lune,soleil,nuages,arbre,sablier);
+        Thread temp=new Thread(new Temp(sablier,affichage));
+        temp.start();
+        Thread avancer=new Thread(new Avancer(piste,affichage,moto,arbre));
         avancer.start();
         moto.setAffichage(affichage);
         frame.addKeyListener(new Control(moto));

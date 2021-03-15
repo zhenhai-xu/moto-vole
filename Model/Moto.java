@@ -16,12 +16,13 @@ public class Moto {
     private Nuages nuages;
     private Soleil soleil;
     private Lune lune;
+    private Arbre arbre;
 
     public  boolean up = false;
     public  boolean down = false;
     public  boolean left = false;
     public  boolean right = false;
-    public Moto(Piste piste,Nuages nuages,Lune lune,Soleil soleil){
+    public Moto(Piste piste,Nuages nuages,Lune lune,Soleil soleil,Arbre arbre){
     this.absc = Affichage.LARG/2-Affichage.WIDTH/2;
         try {
             this.pitrue = ImageIO.read(new File("src/png/moto.png"));
@@ -32,6 +33,7 @@ public class Moto {
         this.nuages =nuages;
         this.lune=lune;
         this.soleil=soleil;
+        this.arbre=arbre;
     }
 /*
     /**
@@ -70,17 +72,17 @@ public class Moto {
             nuages.moveR();
             soleil.moveR();
             lune.moveR();
-            affichage.getArbrelisteR();
+            arbre.getArbrelisteR();
             piste.setPositVoieR();
         }
     }
     public void moveRight() {
-        if(right && this.absc < affichage.LARG-affichage.WIDTH){
+        if(right && this.absc < Affichage.LARG - Affichage.WIDTH){
             absc += ABSC_MOVE;
             nuages.moveL();
             soleil.moveL();
             lune.moveL();
-            affichage.getArbrelisteL();
+            arbre.getArbrelisteL();
             piste.setPositVoieL();
         }
     }
