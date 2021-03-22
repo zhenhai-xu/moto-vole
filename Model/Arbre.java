@@ -17,37 +17,38 @@ public class Arbre {
     public int x;
     public  int y;
     private int index=0;
-    private int XchoixDroit;//generer les arbres dans la piste droite
-    private int XchoixGauche;//generer les arbres dans la piste gauche
     private BufferedImage arbres;
     private List<Arbre> arbresList=new ArrayList<Arbre>();
-
-    public Arbre() {
+    private Piste piste;
+    public Arbre(Piste piste) {
+        this.piste=piste;
         this.x= Affichage.LARG-200;
         this.y=Affichage.HAUT/4- H;
         Random rd=new Random();
         int index=rd.nextInt(8)+1;
-        int n=rd.nextInt(2)+1;//pour afficher les arbres dans la piste droite ou la gauche;
-        this.XchoixDroit=rd.nextInt(200)+Affichage.LARG/2+150;//x est dans la droite;
-        this.XchoixGauche=rd.nextInt(Affichage.LARG/2-200);//x est dans la gauche;
-        if(n==1){
-            this.x=XchoixDroit;
-        }else{
-            this.x=XchoixGauche;
-        }
+        int n=rd.nextInt(2);//pour afficher les arbres dans la piste droite ou la gauche;
+        //generer les arbres dans la piste droite
+        int xchoixDroit = rd.nextInt(200) + Affichage.LARG / 2 + 150;//x est dans la droite;
+        //generer les arbres dans la piste gauche
+        int xchoixGauche = rd.nextInt(Affichage.LARG / 2 - 200);//x est dans la gauche;
         String RamdomArbre="arbre"+index;
-        try {
-            arbres = ImageIO.read(new File("src/png/" + RamdomArbre + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(n==0){
+            this.x= xchoixDroit;
+        }else{
+            this.x= xchoixGauche;
         }
+            try {
+                arbres = ImageIO.read(new File("src/png/" + RamdomArbre + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         this.y=200;
     }
+
     public int getX() {
         return this.x;
     }
-    public int getY() {
-        return this.y;
+    public int getY() { return this.y;
     }
     public BufferedImage getPicture() {
         return  this.arbres;
@@ -56,26 +57,21 @@ public class Arbre {
     /**
      * pour les arbres deplacent de haut A bas;
      */
-    public void move(){
-        y += 10;
-    }
+
 
     //pour prendre note de la nombre de la fonction appliquEe, Toutes les n fois, on ajoue un arbre dans la liste;
     public void getArbre(){
         this.index++;
         if(index>=10){
-            Arbre arbre=new Arbre();
+            Arbre arbre=new Arbre(piste);
             arbresList.add(arbre);
             index=0;
         }
     }
 
     public void arbreMove(){
-        for(int i=0;i<arbresList.size();i++){
-            Arbre arbre=arbresList.get(i);
-            arbre.move();
+        arbresList.forEach(p->p.y+= piste.vitesse);
         }
-    }
 
     /**
      * pour deplacer les arbres A droite;

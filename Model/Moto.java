@@ -9,19 +9,24 @@ import java.io.IOException;
 
 public class Moto {
     private int absc;
+
     private BufferedImage pitrue;
     private Affichage affichage;
     private final int ABSC_MOVE = 10;
+    private int y = Affichage.HAUT-100;
     private Piste piste;
     private Nuages nuages;
     private Soleil soleil;
     private Lune lune;
     private Arbre arbre;
+    private  double VITESSELIMITE=15.0;
 
+    public  boolean gameOver=false;
     public  boolean up = false;
     public  boolean down = false;
     public  boolean left = false;
     public  boolean right = false;
+    public  boolean ralentir=false;//pour verifier si moto est ralenti
     public Moto(Piste piste,Nuages nuages,Lune lune,Soleil soleil,Arbre arbre){
     this.absc = Affichage.LARG/2-Affichage.WIDTH/2;
         try {
@@ -35,35 +40,20 @@ public class Moto {
         this.soleil=soleil;
         this.arbre=arbre;
     }
+    public int getY(){
+        return this.y;
+    };
 /*
     /**
      * Effectuer différentes actions en tapant les touches du clavier
      * @param key
      */
-/*
-    public void move(Direction key) {
-        if(key == Direction.up ) {
-            //this.absc =
-            System.out.println("accelerer");
-        }else if(key == Direction.down ) {
-            //this.absc
-            System.out.println("lentement");
-        }else if(key == Direction.left && this.absc > 0) {
-            this.absc -= ABSC_MOVE;
-            this.piste.setPositVoieR();
-            this.nuages.moveR();
-        }else if(key == Direction.right && this.absc < affichage.LARG-affichage.WIDTH) {
-            this.absc += ABSC_MOVE;
-            this.piste.setPositVoieL();
-            this.nuages.moveL();
-        }else {
-            System.out.println("la grenouille atteigne le bord ");
-        }
-        affichage.repaint();
-    }*/
     public void moveUp() {
-        if(up){
-            System.out.println("acclerer");
+        if(up && this.y>=600){
+            System.out.println("up 5 ");
+            this.y-=5;
+            if(piste.vitesse>=10)
+                this.VITESSELIMITE=5;
         }
     }
     public void moveLeft() {
@@ -87,16 +77,16 @@ public class Moto {
         }
     }
     public void moveDown() {
-        if (down) {
-            System.out.println("lencement");
-        }
+
     }
 public void move(){
     moveUp();
     moveDown();
     moveLeft();
     moveRight();
-    affichage.repaint();
+    if(y<700&& up != true){
+        y+=5;
+    }if(y==700) VITESSELIMITE=15;
 }
     /**
      * setting affichage a moto.
@@ -108,12 +98,35 @@ public void move(){
 
     /**
      * get l'abscisse.
-     * @return
+     * @return absc
      */
     public int getAbsc() {
         return this.absc;
     }
     public BufferedImage getPitrue(){
         return this.pitrue;
+    }
+
+    /**
+     * verifier si il est ralentit.;
+     */
+    public void ralentir(){
+        for(int i=0;i<arbre.getArbresList().size();i++) {
+            Arbre arbre= this.arbre.getArbresList().get(i);
+           if(Math.abs(absc - arbre.x) <= arbre.W && Math.abs(y - arbre.y) <= arbre.H){
+               ralentir=true;
+           }
+        }
+    }
+
+    public void setMotoV(){
+        double x =piste.x_actuel(Affichage.HAUT-Affichage.HEIGHT/2);
+        //System.out.println(x+"  "+piste.getPiste().get(0).x);
+        if( this.absc+Affichage.WIDTH/2 >= x-100 &&  this.absc+Affichage.WIDTH/2 <= x+100 && piste.vitesse<= VITESSELIMITE){
+            piste.setterPlus();
+        }else{
+            if(piste.vitesse > 2){ piste.setterMoins();}
+            else if (piste.vitesse == 0){ gameOver=true; }
+        }
     }
 }

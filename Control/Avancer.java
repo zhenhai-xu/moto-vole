@@ -26,12 +26,17 @@ public class Avancer implements Runnable{
     public void run() {
         while(true){
             try {
-                Thread.sleep(50);
+                Thread.sleep(100);
                 //Modifier les coordonnées de piste
-                piste.setter();
+                moto.setMotoV();
                 moto.move();
                 arbre.getArbre();
                 arbre.arbreMove();//laisser les arbres qui descendre;
+                moto.ralentir();//pour verifier si il peut changevitesse;
+                if(moto.ralentir){
+                    piste.changeVitesse();
+                    moto.ralentir=false;
+                }
                 affichage.revalidate();
                 affichage.repaint();
             }catch (InterruptedException e){

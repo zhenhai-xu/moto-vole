@@ -17,7 +17,6 @@ public class Lune extends Paysage{
 
     public Lune(String lune){
         super(lune);
-        System.out.println(this.x+ " " + this.y);
         this.x=Affichage.LARG-200;
         this.y=Affichage.HAUT/4- H;
     }

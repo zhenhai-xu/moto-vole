@@ -1,13 +1,13 @@
 import Control.Avancer;
 import Control.Control;
+import Control.Game;
+
 import Control.Temp;
 import Model.*;
 import Vue.Affichage;
 
 import javax.swing.*;
-import java.util.ArrayList;
-
-import java.util.List;
+import java.awt.*;
 
 
 public class main {
@@ -21,18 +21,25 @@ public class main {
 //        Position position = new Position(LARG/2-WIDTH/2,HAUT-HEIGHT);
 
         Nuages nuages=new Nuages("nuage");
-        Piste piste=new Piste();
+
         Lune lune = new Lune("lune");
         Soleil soleil=new Soleil("soleil");
-        Arbre arbre=new Arbre();
+        Piste piste=new Piste();
+        Arbre arbre=new Arbre(piste);
+
         Moto moto = new Moto(piste,nuages, lune, soleil,arbre);
-        Sablier sablier=new Sablier();
+        Sablier sablier=new Sablier(piste,moto);
         Affichage affichage = new Affichage(moto,piste,lune,soleil,nuages,arbre,sablier);
-        Thread temp=new Thread(new Temp(sablier,affichage));
-        temp.start();
-        Thread avancer=new Thread(new Avancer(piste,affichage,moto,arbre));
-        avancer.start();
         moto.setAffichage(affichage);
+
+        Thread game=new Thread(new Game(sablier,affichage,moto, piste, frame));
+        Thread avancer=new Thread(new Avancer(piste,affichage,moto,arbre));
+        Thread temp=new Thread(new Temp(sablier,affichage,moto));
+        temp.start();
+        avancer.start();
+        game.start();
+
+
         frame.addKeyListener(new Control(moto));
         frame.add(affichage);
         //Ajouter un moniteur de souris.
@@ -40,5 +47,7 @@ public class main {
         frame.pack();
         //Réglez l'écran pour qu'il soit visible.
         frame.setVisible(true);
+
+
     }
 }

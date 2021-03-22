@@ -14,9 +14,9 @@ public class Affichage extends JPanel {
     /**la hauteur de la fenêtre.*/
     public static final int HAUT = 800;
     /**La largeur de l'objet.*/
-    public static final int WIDTH = 100;
+    public  static int WIDTH = 100;
     /**La hauteur de l'objet.*/
-    public static final int HEIGHT = 150;
+    public  static int HEIGHT = 80;
 
 
     private Moto moto;
@@ -43,6 +43,8 @@ public class Affichage extends JPanel {
         setPreferredSize(new Dimension(LARG, HAUT));
         repaint();
     }
+
+
 
 
 
@@ -79,12 +81,11 @@ public class Affichage extends JPanel {
         //Dessinez un arrière-plan éloigné.
         g.drawImage(presqueSoir.getPicture(), presqueSoir.getAbsc(), presqueSoir.getY(), presqueSoir.W, presqueSoir.H, null);
         //Dessine une moto.
-        g.drawImage(moto.getPitrue(), moto.getAbsc(), HAUT - HEIGHT, WIDTH, HEIGHT, null);
+        g.drawImage(moto.getPitrue(), moto.getAbsc(), moto.getY(), WIDTH, HEIGHT, null);
         if (lune.getY() >= 0) {
             g.drawImage(soir.getPicture(),soir.getAbsc(), soir.getY(), soir.W, soir.H, null);
             lune.run();
             g.drawImage(lune.getPicture(), lune.getAbsc(), lune.getY(), lune.W, lune.H, null);
-            System.out.println(lune.getAbsc()+" 2" +lune.getY());
         } else if (soleil.getY() >= 0) {
             g.drawImage(montagne.getPicture(), montagne.getAbsc(), montagne.getY(), montagne.W, montagne.H, null);
             soleil.run();
@@ -102,8 +103,10 @@ public class Affichage extends JPanel {
         }
         Font f5 = new Font(null, Font.BOLD+Font.ITALIC,20);
         g.setFont(f5);
-        g.drawString("Metre : " + piste.getter()  + " M", 20, 500);
-        g.drawString("Rest temp : " + sablier.getMin() + ":"+sablier.getSec(), 20, 300);
+        g.drawString("vitesse : ",710,750);
+        g.drawString(Math.round( piste.getter()* 8 ) + " KM/H", 700, 780);
+        g.drawString("temps restant : ",20,750);
+        g.drawString(+ sablier.getMin() + ":"+(sablier.getSec()<10?0:"")+sablier.getSec(), 20, 780);
     }
 
 }
