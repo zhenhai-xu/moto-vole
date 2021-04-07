@@ -13,8 +13,8 @@ import java.io.IOException;
  */
 public class Soleil extends Paysage{
 
-    public int W = 100;//weight de la lune
-    public int H = 60;// hauteur de la lune
+    public int W = 100;//weight de la Soleil
+    public int H = 60;// height de la Soleil
     Boolean soir;
 
 

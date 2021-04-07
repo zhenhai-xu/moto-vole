@@ -7,11 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * paysage est le mere de la class Lune，Montagne，Nuages，PresqueSoir，Soir，et Soleil
+ */
 public class Paysage {
 
     private BufferedImage pictrue;
-    int x;//abscisse de la lune
-    int y;//ordonnee de la lune
+    int x;//abscisse de la Paysage
+    int y;//ordonnee de la Paysage
 
     int speedMove = 1;
     public Paysage(String a){
@@ -35,17 +38,18 @@ public class Paysage {
     public int getY() {
         return this.y;
     }
-
+    public void setXL(){this.x -=2;}
+    public void setXR(){this.x +=2;}
     public BufferedImage getPicture(){
         return this.pictrue;
     }
 
     public void moveL(){
-        this.x -= 5;
+        this.x -= Moto.ABSC_MOVE;
     }
 
     public void moveR(){
-        this.x += 5;
+        this.x += Moto.ABSC_MOVE;
     }
 }
 

@@ -13,7 +13,7 @@ public class Lune extends Paysage{
     private BufferedImage pictrue;
 
     public int W=50;//weight de la lune
-    public int H =50;// hauteur de la lune
+    public int H =50;// height de la lune
 
     public Lune(String lune){
         super(lune);

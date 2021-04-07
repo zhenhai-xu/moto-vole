@@ -15,8 +15,8 @@ import java.util.ArrayList;
  * la clasee Montagne, Nuages, PresqueSoir, Soir, Soleil sont meme chose avec la class Lune
  */
 public class Nuages extends Paysage {
-    public int W = 500;//weight de la lune
-    public int H = 150;// hauteur de la lune
+    public int W = 500;//weight de la Nuages
+    public int H = 150;// height de la Nuages
 
     private BufferedImage pictrue;
     public Nuages(String a){

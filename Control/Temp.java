@@ -4,11 +4,8 @@ import Model.Moto;
 import Model.Sablier;
 import Vue.Affichage;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
- * creer un thread pour le temps dimminue de temps en temps.
+ * creer un thread pour former une montre à compte à rebours
  */
 public class Temp implements Runnable{
     private Sablier sablier;
@@ -27,7 +24,6 @@ public class Temp implements Runnable{
                 Thread.sleep(1000);
                 sablier.Soustraire_min();
                 sablier.Soustraire_sec();
-                sablier.getBonus();
 
             }
             catch (InterruptedException e) {

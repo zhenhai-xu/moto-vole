@@ -45,6 +45,7 @@ public class Control implements KeyListener {
     public void keyTyped(KeyEvent e) {
     }
 
+    //Lorsque le bouton est relâché, l'état du bouton doit être changé en false
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:

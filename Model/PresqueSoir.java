@@ -12,8 +12,8 @@ import java.io.IOException;
  */
 public class PresqueSoir extends Paysage{
     private BufferedImage pictrue;
-    public int W = 800;//weight de la lune
-    public int H = 200;// hauteur de la lune
+    public int W = 800;//weight de la Paysage
+    public int H = 205;// hauteur de la Paysage
 
     public PresqueSoir(String a) {
         super(a);

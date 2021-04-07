@@ -13,8 +13,8 @@ import java.io.IOException;
  * la clasee Montagne, Nuages, PresqueSoir, Soir, Soleil sont meme chose avec la class Lune
  */
 public class Montagne extends Paysage{
-    public int W = 800;//weight de la lune
-    public int H = 200;// hauteur de la lune
+    public int W = 800;//weight de la Montagne
+    public int H = 205;// height de la Montagne
 
     public Montagne(String a ){
         super(a);
